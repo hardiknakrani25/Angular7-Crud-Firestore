@@ -8,3 +8,7 @@ div.validation-error{
     font-size: 80%;
     color: darkred;
 }
+
+#toast-container > div {
+    opacity:1;
+}
