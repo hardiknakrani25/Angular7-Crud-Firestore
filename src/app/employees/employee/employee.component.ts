@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from 'src/app/shared/employee.service';
 import { NgForm } from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-employee',
@@ -9,7 +10,7 @@ import { NgForm } from '@angular/forms';
 })
 export class EmployeeComponent implements OnInit {
 
-  constructor(private service:EmployeeService) { }
+  constructor(private service:EmployeeService,private firestore:AngularFirestore) { }
 
   ngOnInit() {
 this.resetForm();
@@ -25,5 +26,12 @@ this.service.formData={
   position:'',
   mobile:''
 };
+  }
+
+  onSubmit(form:NgForm){
+    let data=form.value;
+    console.log(data);
+    this.firestore.collection('employees').add(data);
+    this.resetForm(form);
   }
 }
